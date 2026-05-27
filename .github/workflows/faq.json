@@ -1,0 +1,13 @@
+{
+  "english": [
+    { "q": "How do I change language?", "a": "Use the language toggle in your profile or the top bar." },
+    { "q": "What age group should I choose?", "a": "Choose the group that matches the child's current age." },
+    { "q": "How are contests judged?", "a": "Reading tests are auto-scored; writing competitions use a mix of automated checks and human judges." }
+  ],
+  "kiswahili": [
+    { "q": "Ninawezaje kubadilisha lugha?", "a": "Tumia chaguo la lugha kwenye wasifu wako au juu ya ukurasa." }
+  ],
+  "motherTongue": [
+    { "q": "Sample mother tongue FAQ", "a": "Answer in mother tongue." }
+  ]
+}

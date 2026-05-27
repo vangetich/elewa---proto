@@ -1,0 +1,15 @@
+{
+  "name": "elewa-prototype",
+  "version": "1.0.0",
+  "description": "ELEWA prototype - landing, signup, dashboard, proverbs, books, activities",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nanoid": "^4.0.0"
+  }
+}

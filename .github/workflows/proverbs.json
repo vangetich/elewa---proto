@@ -1,0 +1,13 @@
+{
+  "english": [
+    { "text": "Wisdom is like fire. People take it from others.", "source": "African proverb" },
+    { "text": "If you want to go fast, go alone. If you want to go far, go together.", "source": "African proverb" }
+  ],
+  "kiswahili": [
+    { "text": "Busara ni kama moto; watu huichukua kwa wengine.", "source": "Methali ya Kiafrika" },
+    { "text": "Ukipenda kwenda haraka, nenda peke yako; ukitaka kwenda mbali, nenda pamoja.", "source": "Methali ya Kiafrika" }
+  ],
+  "motherTongue": [
+    { "text": "Wisdom shared in mother tongue (sample).", "source": "Local proverb" }
+  ]
+}

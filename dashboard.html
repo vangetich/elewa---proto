@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ELEWA — Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">ELEWA</a>
+      <div>
+        <select id="langToggle" class="form-select form-select-sm">
+          <option value="motherTongue">Mother Tongue</option>
+          <option value="kiswahili">Kiswahili</option>
+          <option value="english" selected>English</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div id="greeting" class="mb-4"></div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5>How-to Guide</h5>
+          <div id="howto"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5>Books (age-appropriate)</h5>
+          <ul id="books" class="list-unstyled mb-0"></ul>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card p-3">
+          <h5>Activities Hub</h5>
+          <div id="activities"></div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card p-3">
+          <h5>FAQ</h5>
+          <div id="faq"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script>
+const userId = sessionStorage.getItem('elewa_user');
+
+async function fetchProverb(lang) {
+  const res = await fetch('/api/proverb?lang=' + encodeURIComponent(lang));
+  const json = await res.json();
+  return json.proverb;
+}
+async function fetchBooks(ageGroup, lang) {
+  const res = await fetch(`/api/books?ageGroup=${encodeURIComponent(ageGroup)}&lang=${encodeURIComponent(lang)}`);
+  return res.json();
+}
+async function fetchFAQ(lang) {
+  const res = await fetch(`/api/faq?lang=${encodeURIComponent(lang)}`);
+  return res.json();
+}
+async function fetchActivities() {
+  const res = await fetch('/api/activities');
+  return res.json();
+}
+
+async function loadDashboard() {
+  let user = null;
+  if (userId) {
+    const res = await fetch('/api/user/' + userId);
+    if (res.ok) user = (await res.json()).user;
+  }
+  const lang = (user && user.language) ? (user.language === 'motherTongue' ? 'motherTongue' : user.language) : 'english';
+  document.getElementById('langToggle').value = lang;
+
+  const proverb = await fetchProverb(lang);
+  const name = user ? user.name.split(' ')[0] : 'Friend';
+  document.getElementById('greeting').innerHTML = `
+    <div class="p-3 rounded" style="background:linear-gradient(90deg,#f7f2ec,#eef7f0);">
+      <strong>Hello ${name}</strong>
+      <p class="mb-0"><em>${proverb.text}</em></p>
+      <small class="text-muted">${proverb.source || ''}</small>
+    </div>`;
+
+  const howto = document.getElementById('howto');
+  const ageGroup = user ? user.ageGroup : '5-12';
+  if (ageGroup === '5-12') {
+    howto.innerHTML = `<p><strong>5–12 years</strong> — Focus on phonics, short stories, picture books. Daily: 5 min phonics, 10–15 min guided reading, 5 min vocab game.</p>`;
+  } else {
+    howto.innerHTML = `<p><strong>13–17 years</strong> — Focus on critical reading and writing. Daily: 10 min vocab, 20–30 min reading, 10 min writing prompt.</p>`;
+  }
+
+  const booksRes = await fetchBooks(ageGroup, lang);
+  const booksList = document.getElementById('books');
+  booksList.innerHTML = '';
+  (booksRes.books || []).forEach(b => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${b.title}</strong> — ${b.author}`;
+    booksList.appendChild(li);
+  });
+
+  const acts = await fetchActivities();
+  const activitiesDiv = document.getElementById('activities');
+  activitiesDiv.innerHTML = '';
+  (acts.activities || []).forEach(a => {
+    const el = document.createElement('div');
+    el.className = 'mb-2';
+    el.innerHTML = `<strong>${a.title}</strong> <span class="text-muted">(${a.type}, ${a.level})</span>
+      <div><button class="btn btn-sm btn-outline-primary mt-1" onclick="enterActivity('${a.id}')">Enter</button></div>`;
+    activitiesDiv.appendChild(el);
+  });
+
+  const faqRes = await fetchFAQ(lang);
+  const faqDiv = document.getElementById('faq');
+  faqDiv.innerHTML = '';
+  (faqRes.faq || []).forEach(item => {
+    const q = document.createElement('p');
+    q.innerHTML = `<strong>${item.q}</strong><br><span class="text-muted">${item.a}</span>`;
+    faqDiv.appendChild(q);
+  });
+}
+
+function enterActivity(id) {
+  alert('Entering activity: ' + id + ' (prototype)');
+}
+
+document.getElementById('langToggle').addEventListener('change', (e) => {
+  loadDashboard();
+});
+
+loadDashboard();
+</script>
+</body>
+</html>

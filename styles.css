@@ -1,0 +1,13 @@
+:root{
+  --accent:#b85c1b;
+  --accent2:#2b6a3a;
+  --bg:#fffdf8;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+body { background: var(--bg); color:#1b1b1b; }
+.hero {
+  background: linear-gradient(90deg, rgba(43,106,58,0.9), rgba(184,92,27,0.9));
+  padding: 4rem 0;
+}
+.hero h1, .hero p { color: #fff; }
+.card { border-radius: 12px; }

@@ -1,0 +1,124 @@
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Background silhouette (African flags + tech circuit image) */
+.bg-silhouette {
+  position: fixed;
+  inset: 0;
+  background: url('download 1.jpeg') no-repeat center;
+  background-size: cover;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+/* Hero section */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(rgba(43,106,58,0.8), rgba(184,92,27,0.8)),
+              url('1520079654098.jpeg') center/cover no-repeat;
+}
+
+/* Cards */
+.card {
+  border-radius: 12px;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: #2b6a3a;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #24532d;
+}
+/* Partners section */
+.partner-logo {
+  max-height: 80px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+.partner-logo:hover {
+  opacity: 1;
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+.quote {
+  font-style: italic;
+  color: #444;
+}
+.author {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Testimonials with subtle African hues */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(184,92,27,0.08), rgba(43,106,58,0.08));
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.quote {
+  font-style: italic;
+  color: #333;
+}
+.author {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #2b6a3a; /* deep green for emphasis */
+}
+
+
+/* Carousel controls styling */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(40%) sepia(80%) saturate(300%) hue-rotate(90deg);
+}
+
+/* Carousel indicators styling */
+.carousel-indicators [data-bs-target] {
+  background-color: #2b6a3a; /* deep green */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.carousel-indicators .active {
+  background-color: #b85c1b; /* warm ochre */
+}
+
+/* Testimonials Carousel with fade */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(184,92,27,0.08), rgba(43,106,58,0.08));
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.quote {
+  font-style: italic;
+  color: #333;
+}
+.author {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #2b6a3a;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(40%) sepia(80%) saturate(300%) hue-rotate(90deg);
+}
